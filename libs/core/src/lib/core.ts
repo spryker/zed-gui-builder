@@ -1,6 +1,7 @@
 import { BuilderConfig, getBuilder } from './builder';
-import { maybeValidate, ProjectConfig, InvalidConfigError } from './config';
+import { InvalidConfigError, maybeValidate, ProjectConfig } from './config';
 import { getLocator, LocatorConfig } from './locator';
+import { getLogger } from './logger';
 
 export interface BuildOptions {
   project: ProjectConfig;
@@ -9,6 +10,7 @@ export interface BuildOptions {
 }
 
 export async function execBuild(options: BuildOptions): Promise<void> {
+  const logger = getLogger();
   const locator = getLocator();
   const builder = getBuilder();
 
@@ -23,19 +25,19 @@ export async function execBuild(options: BuildOptions): Promise<void> {
     throw new Error(`Unexpected error occurred during config validation: ${e}`);
   }
 
-  console.log(`Locating entry points in ${options.project.rootPath}...`);
+  logger.log(`Locating entry points in ${options.project.rootPath}...`);
 
   const entries = await locator.findEntries(options.project.rootPath, {
     project: options.project,
     config: options.locator
   });
 
-  console.log(`Building entries into ${options.project.outputPath}....`);
+  logger.log(`Building entries into ${options.project.outputPath}....`);
 
   await builder.buildWithEntries(entries, options.project.outputPath, {
     project: options.project,
     config: options.builder
   });
 
-  console.log(`Build completed!`);
+  logger.log(`Build completed!`);
 }

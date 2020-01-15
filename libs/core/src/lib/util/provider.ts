@@ -14,9 +14,10 @@ export class ValueNotProvidedError extends Error {
 
 export function createProvider<T>(
   name: string,
-  notProvidedMsg?: string
+  notProvidedMsg?: string,
+  defaultValue?: T
 ): Provider<T> {
-  let _value: T | undefined;
+  let _value: T | undefined = defaultValue;
 
   return {
     provide(value) {
