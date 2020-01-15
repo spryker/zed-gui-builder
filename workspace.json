@@ -7,6 +7,14 @@
       "projectType": "library",
       "schematics": {},
       "architect": {
+        "compile": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              { "command": "tsc -p libs/core/tsconfig.lib.json --noEmit" }
+            ]
+          }
+        },
         "lint": {
           "builder": "@nrwl/linter:lint",
           "options": {
