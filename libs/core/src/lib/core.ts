@@ -29,14 +29,16 @@ export async function execBuild(options: BuildOptions): Promise<void> {
 
   const entries = await locator.findEntries(options.project.rootPath, {
     project: options.project,
-    config: options.locator
+    config: options.locator,
+    logger
   });
 
   logger.log(`Building entries into ${options.project.outputPath}....`);
 
   await builder.buildWithEntries(entries, options.project.outputPath, {
     project: options.project,
-    config: options.builder
+    config: options.builder,
+    logger
   });
 
   logger.log(`Build completed!`);

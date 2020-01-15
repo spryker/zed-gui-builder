@@ -8,7 +8,9 @@ import { Locator, provideLocator, resetLocator } from './locator';
 import { provideLogger } from './logger';
 
 describe('Core', () => {
-  beforeAll(() => provideLogger(new NoopLogger()));
+  const noopLogger = new NoopLogger();
+
+  beforeAll(() => provideLogger(noopLogger));
 
   afterEach(() => {
     resetLocator();
@@ -53,7 +55,8 @@ describe('Core', () => {
 
       expect(mockLocator.findEntries).toHaveBeenCalledWith('root', {
         config: 'locator-config',
-        project
+        project,
+        logger: noopLogger
       });
 
       expect(mockBuilder.buildWithEntries).toHaveBeenCalledWith(
@@ -61,7 +64,8 @@ describe('Core', () => {
         'out',
         {
           config: 'builder-config',
-          project
+          project,
+          logger: noopLogger
         }
       );
     });
