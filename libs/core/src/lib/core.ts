@@ -1,16 +1,17 @@
 import { BuilderConfig, getBuilder } from './builder';
 import { InvalidConfigError, maybeValidate, ProjectConfig } from './config';
 import { getLocator, LocatorConfig } from './locator';
-import { getLogger } from './logger';
+import { getLogger, LogLevel } from './logger';
 
 export interface BuildOptions {
   project: ProjectConfig;
   locator?: LocatorConfig;
   builder?: BuilderConfig;
+  logLevel?: LogLevel;
 }
 
 export async function execBuild(options: BuildOptions): Promise<void> {
-  const logger = getLogger();
+  const logger = getLogger(options.logLevel);
   const locator = getLocator();
   const builder = getBuilder();
 
