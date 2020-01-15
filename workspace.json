@@ -15,6 +15,14 @@
             ]
           }
         },
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/libs/core",
+            "tsConfig": "libs/core/tsconfig.lib.json",
+            "main": "libs/core/src/index.ts"
+          }
+        },
         "lint": {
           "builder": "@nrwl/linter:lint",
           "options": {
