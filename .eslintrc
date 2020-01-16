@@ -23,6 +23,15 @@
       {
         "allow": [],
         "depConstraints": [
+          { "sourceTag": "core", "onlyDependOnLibsWithTags": [] },
+          {
+            "sourceTag": "builder",
+            "onlyDependOnLibsWithTags": ["core", "builder"]
+          },
+          {
+            "sourceTag": "locator",
+            "onlyDependOnLibsWithTags": ["core", "locator"]
+          },
           { "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }
         ]
       }

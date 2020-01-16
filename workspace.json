@@ -7,20 +7,14 @@
       "projectType": "library",
       "schematics": {},
       "architect": {
-        "compile": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              { "command": "tsc -p libs/core/tsconfig.lib.json --noEmit" }
-            ]
-          }
-        },
         "build": {
-          "builder": "@nrwl/node:build",
+          "builder": "@nrwl/node:package",
           "options": {
             "outputPath": "dist/libs/core",
             "tsConfig": "libs/core/tsconfig.lib.json",
-            "main": "libs/core/src/index.ts"
+            "main": "libs/core/src/index.ts",
+            "packageJson": "libs/core/package.json",
+            "assets": ["libs/core/**/*.md"]
           }
         },
         "lint": {
@@ -40,6 +34,43 @@
           "options": {
             "jestConfig": "libs/core/jest.config.js",
             "tsConfig": "libs/core/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "builder-webpack": {
+      "root": "libs/builder-webpack",
+      "sourceRoot": "libs/builder-webpack/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/builder-webpack",
+            "tsConfig": "libs/builder-webpack/tsconfig.lib.json",
+            "main": "libs/builder-webpack/src/index.ts",
+            "packageJson": "libs/builder-webpack/package.json",
+            "assets": ["libs/builder-webpack/**/*.md"]
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/builder-webpack/.eslintrc",
+            "tsConfig": [
+              "libs/builder-webpack/tsconfig.lib.json",
+              "libs/builder-webpack/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/builder-webpack/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/builder-webpack/jest.config.js",
+            "tsConfig": "libs/builder-webpack/tsconfig.spec.json"
           }
         }
       }

@@ -1,0 +1,9 @@
+{
+  "name": "@zed-builder/builder-webpack",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@zed-builder/core": "^0.0.1",
+    "webpack": "^4.41.5",
+    "webpack-merge": "^4.2.2"
+  }
+}

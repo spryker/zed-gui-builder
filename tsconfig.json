@@ -18,7 +18,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@zed-builder/core": ["libs/core/src/index.ts"]
+      "@zed-builder/core": [
+        "dist/libs/core/index.d.ts",
+        "libs/core/src/index.d.ts"
+      ],
+      "@zed-builder/builder-webpack": [
+        "dist/libs/builder-webpack/index.d.ts",
+        "libs/builder-webpack/src/index.d.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

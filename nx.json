@@ -12,7 +12,10 @@
   },
   "projects": {
     "core": {
-      "tags": []
+      "tags": ["lib", "core"]
+    },
+    "builder-webpack": {
+      "tags": ["lib", "builder"]
     }
   }
 }
