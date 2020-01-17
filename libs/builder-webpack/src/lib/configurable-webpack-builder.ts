@@ -1,6 +1,5 @@
 import { inspect } from 'util';
 import * as webpack from 'webpack';
-import * as webpackMerge from 'webpack-merge';
 
 import {
   WebpackBuilder,
@@ -12,6 +11,11 @@ import {
   WebpackConfigurator
 } from './configurator';
 import { runCompiler } from './util/async-webpack';
+import {
+  webpackAppendEntry,
+  webpackAppendPlugins,
+  webpackAppendRules
+} from './webpack-configurators';
 
 export class ConfigurableWebpackBuilder
   implements WebpackBuilder, WebpackBuilderConfigurator {
@@ -19,19 +23,11 @@ export class ConfigurableWebpackBuilder
   private webpackFactory: WebpackFactory = () => webpack;
 
   addRule(rule: webpack.RuleSetRule): this {
-    return this.addConfigurator(config => {
-      return webpackMerge.strategy({ 'module.rules': 'append' })(config, {
-        module: { rules: [rule] }
-      });
-    });
+    return this.addConfigurator(webpackAppendRules([rule]));
   }
 
   addPlugin(plugin: webpack.Plugin): this {
-    return this.addConfigurator(config => {
-      return webpackMerge.strategy({ plugins: 'append' })(config, {
-        plugins: [plugin]
-      });
-    });
+    return this.addConfigurator(webpackAppendPlugins([plugin]));
   }
 
   addConfigurator(configurator: WebpackConfigurator): this {
@@ -77,12 +73,15 @@ export class ConfigurableWebpackBuilder
     options: WebpackBuilderOptions
   ): Promise<webpack.Configuration> {
     const logger = options.logger;
-    const initialConfig = webpackMerge.strategy({ entry: 'append' })(
-      { entry: entries, output: { path: outputPath } },
-      { entry: options.config.entry }
-    );
+
+    const initialConfig: webpack.Configuration = {
+      entry: entries,
+      output: { path: outputPath }
+    };
 
     logger.debug(`Initial Webpack config: ${inspect(initialConfig)}`);
+
+    this.addConfigurator(webpackAppendEntry(options.config.entry));
 
     logger.debug(`Resolving Webpack config from configurators...`);
     logger.debug(`Executing ${this.configurators.length} configurator(s)`);
