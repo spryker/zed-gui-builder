@@ -18,7 +18,7 @@ export class ConfigurableWebpackBuilder
   private configurators: WebpackConfigurator[] = [];
   private webpackFactory: WebpackFactory = () => webpack;
 
-  addRule(rule: webpack.Rule): this {
+  addRule(rule: webpack.RuleSetRule): this {
     return this.addConfigurator(config => {
       return webpackMerge.strategy({ 'module.rules': 'append' })(config, {
         module: { rules: [rule] }
