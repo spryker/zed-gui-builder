@@ -2,7 +2,7 @@ import { Builder, BuilderOptions } from '@zed-builder/core';
 import * as webpack from 'webpack';
 
 export interface WebpackBuilderConfig {
-  entry: webpack.Entry | webpack.EntryFunc;
+  entry?: webpack.Entry | webpack.EntryFunc;
 }
 
 export type WebpackBuilderOptions = BuilderOptions<WebpackBuilderConfig>;
