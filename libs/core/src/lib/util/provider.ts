@@ -12,26 +12,32 @@ export class ValueNotProvidedError extends Error {
   }
 }
 
+const UNINITIALIZED = Symbol('UNINITIALIZED');
+
 export function createProvider<T>(
   name: string,
   notProvidedMsg?: string,
-  defaultValue?: T
+  defaultValueFactory?: () => T
 ): Provider<T> {
-  let _value: T | undefined = defaultValue;
+  let _value: T | typeof UNINITIALIZED = UNINITIALIZED;
 
   return {
     provide(value) {
       _value = value;
     },
     get() {
-      if (!_value) {
-        throw new ValueNotProvidedError(name, notProvidedMsg);
+      if (_value !== UNINITIALIZED) {
+        return _value;
       }
 
-      return _value;
+      if (defaultValueFactory) {
+        return defaultValueFactory();
+      }
+
+      throw new ValueNotProvidedError(name, notProvidedMsg);
     },
     reset() {
-      _value = undefined;
+      _value = UNINITIALIZED;
     }
   };
 }

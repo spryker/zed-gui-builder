@@ -5,7 +5,7 @@ import { Logger, LogLevel } from './logger';
 const loggerProvider = createProvider<Logger>(
   'Logger',
   `Use 'provideLogger()'!`,
-  new ConsoleLogger()
+  () => new ConsoleLogger()
 );
 
 export const provideLogger = loggerProvider.provide;
