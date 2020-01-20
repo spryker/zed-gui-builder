@@ -74,6 +74,43 @@
           }
         }
       }
+    },
+    "builder-ng-webpack": {
+      "root": "libs/builder-ng-webpack",
+      "sourceRoot": "libs/builder-ng-webpack/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/builder-ng-webpack/.eslintrc",
+            "tsConfig": [
+              "libs/builder-ng-webpack/tsconfig.lib.json",
+              "libs/builder-ng-webpack/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/builder-ng-webpack/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/builder-ng-webpack/jest.config.js",
+            "tsConfig": "libs/builder-ng-webpack/tsconfig.spec.json"
+          }
+        },
+        "build": {
+          "builder": "@nrwl/node:package",
+          "options": {
+            "outputPath": "dist/libs/builder-ng-webpack",
+            "tsConfig": "libs/builder-ng-webpack/tsconfig.lib.json",
+            "packageJson": "libs/builder-ng-webpack/package.json",
+            "main": "libs/builder-ng-webpack/src/index.ts",
+            "assets": ["libs/builder-ng-webpack/**/*.md"]
+          }
+        }
+      }
     }
   },
   "cli": {

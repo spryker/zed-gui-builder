@@ -1,0 +1,15 @@
+{
+  "name": "@zed-builder/builder-ng-webpack",
+  "version": "0.0.1",
+  "dependencies": {
+    "@angular-devkit/architect": "^0.803.23",
+    "@angular-devkit/build-angular": "^0.803.23",
+    "@angular-devkit/core": "^8.3.23",
+    "@zed-builder/builder-webpack": "^0.0.1"
+  },
+  "peerDependencies": {
+    "@zed-builder/core": "^0.0.1",
+    "webpack": "^4.41.5",
+    "webpack-merge": "^4.2.2"
+  }
+}

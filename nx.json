@@ -16,6 +16,9 @@
     },
     "builder-webpack": {
       "tags": ["builder"]
+    },
+    "builder-ng-webpack": {
+      "tags": ["builder"]
     }
   }
 }
