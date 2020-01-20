@@ -8,7 +8,9 @@ export interface WebpackBuilderConfig {
 
 export type WebpackBuilderOptions = BuilderOptions<WebpackBuilderConfig>;
 
-export interface WebpackBuilder extends Builder<WebpackBuilderConfig> {
+export interface WebpackBuilder<
+  C extends WebpackBuilderConfig = WebpackBuilderConfig
+> extends Builder<C> {
   provideWebpack(factory: WebpackFactory): void;
 }
 
