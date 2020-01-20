@@ -1,5 +1,6 @@
-import { Builder, BuilderOptions } from '@zed-builder/core';
 import * as webpack from 'webpack';
+
+import { Builder, BuilderOptions } from '@zed-builder/core';
 
 export interface WebpackBuilderConfig {
   entry?: webpack.Entry | webpack.EntryFunc;

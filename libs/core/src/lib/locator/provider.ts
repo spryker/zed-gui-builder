@@ -1,4 +1,5 @@
 import { createProvider } from '../util/provider';
+
 import { Locator } from './locator';
 
 const locatorProvider = createProvider<Locator>(
