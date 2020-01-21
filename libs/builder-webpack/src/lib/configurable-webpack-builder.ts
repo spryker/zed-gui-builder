@@ -1,4 +1,3 @@
-import { inspect } from 'util';
 import * as webpack from 'webpack';
 
 import {
@@ -51,7 +50,7 @@ export class ConfigurableWebpackBuilder
     const config = await this.resolveConfig(entries, outputPath, options);
 
     logger.log(`Resolved Webpack config!`);
-    logger.debug(`Config: ${inspect(config)}`);
+    logger.debug(`Config:`, config);
 
     logger.debug(`Creating Webpack Compiler from config...`);
 
@@ -79,7 +78,7 @@ export class ConfigurableWebpackBuilder
       output: { path: outputPath }
     };
 
-    logger.debug(`Initial Webpack config: ${inspect(initialConfig)}`);
+    logger.debug(`Initial Webpack config:`, initialConfig);
 
     this.addConfigurator(webpackAppendEntry(options.config.entry));
 
@@ -93,7 +92,7 @@ export class ConfigurableWebpackBuilder
     );
 
     logger.debug(`Resolved Webpack config from configurators!`);
-    logger.debug(`Config after configurators: ${inspect(config)}`);
+    logger.debug(`Config after configurators:`, config);
 
     return config;
   }
