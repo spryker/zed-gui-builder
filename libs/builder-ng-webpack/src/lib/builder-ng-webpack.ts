@@ -1,4 +1,3 @@
-import { inspect } from 'util';
 import * as webpackMerge from 'webpack-merge';
 
 import {
