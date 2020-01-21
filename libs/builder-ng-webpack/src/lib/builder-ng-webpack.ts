@@ -85,8 +85,7 @@ export class NgWebpackBuilderImpl implements NgWebpackBuilder {
           resolve: { modules: cliCommonConfig?.resolve?.modules },
           resolveLoader: cliCommonConfig.resolveLoader
         },
-        { entry: cliCommonConfig.entry, plugins: cliStyleConfig.plugins },
-        { entry: entries }
+        { entry: cliCommonConfig.entry, plugins: cliStyleConfig.plugins }
       );
 
       logger.debug(`Final Webpack config:`, finalConfig);
