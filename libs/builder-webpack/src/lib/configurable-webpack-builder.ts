@@ -10,6 +10,7 @@ import {
   WebpackConfigurator
 } from './configurator';
 import { runCompiler } from './util/async-webpack';
+import { reducePromises } from './util/promise';
 import {
   webpackAppendEntry,
   webpackAppendPlugins,
@@ -85,10 +86,10 @@ export class ConfigurableWebpackBuilder
     logger.debug(`Resolving Webpack config from configurators...`);
     logger.debug(`Executing ${this.configurators.length} configurator(s)`);
 
-    const config = await this.configurators.reduce(
-      (prevConfig, configurator) =>
-        prevConfig.then(c => configurator(c, options)),
-      Promise.resolve(initialConfig)
+    const config = await reducePromises(
+      this.configurators,
+      (config, configurator) => configurator(config, options),
+      initialConfig
     );
 
     logger.debug(`Resolved Webpack config from configurators!`);
