@@ -18,6 +18,11 @@ export const getLogger = (logLevel: LogLevel = LogLevel.debug) => {
 
   if (logLevel > LogLevel.debug) {
     logger.debug = noop;
+  } else {
+    logger.debug = require('./inspect-middleware').inspectableLog(
+      logger.debug,
+      { colors: true, depth: Infinity }
+    );
   }
 
   if (logLevel > LogLevel.default) {

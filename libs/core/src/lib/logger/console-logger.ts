@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Logger } from './logger';
 
 function getConsoleBridge(): new () => Console {
   return function ConsoleBridge() {
     return console;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } as any;
 }
 

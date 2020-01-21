@@ -7,9 +7,11 @@ export enum LogLevel {
   error
 }
 
+export type LoggerFn = (...msgs: unknown[]) => void;
+
 export interface Logger {
-  debug(...msgs: any[]): void;
-  log(...msgs: any[]): void;
-  warn(...msgs: any[]): void;
-  error(...msgs: any[]): void;
+  debug: LoggerFn;
+  log: LoggerFn;
+  warn: LoggerFn;
+  error: LoggerFn;
 }
