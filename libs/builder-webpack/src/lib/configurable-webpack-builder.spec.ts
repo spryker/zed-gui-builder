@@ -2,23 +2,10 @@ import { Configuration } from 'webpack';
 
 import { NoopLogger } from '@zed-builder/core/testing';
 
+import { createWebpackMock } from '../../testing';
+
 import { WebpackBuilderOptions } from './builder';
 import { ConfigurableWebpackBuilder } from './configurable-webpack-builder';
-
-class WebpackCompilerMock {
-  run = jest
-    .fn()
-    .mockImplementation((cb: (e: unknown, stats: unknown) => void) =>
-      cb(null, null)
-    );
-}
-
-function createWebpackMock() {
-  const webpackCompilerMock = new WebpackCompilerMock();
-  const webpackMock = jest.fn().mockReturnValue(webpackCompilerMock);
-
-  return { webpackMock, webpackCompilerMock };
-}
 
 describe('ConfigurableWebpackBuilder', () => {
   describe('buildWithEntries() method', () => {

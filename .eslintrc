@@ -52,7 +52,10 @@
     "@nrwl/nx/enforce-module-boundaries": [
       "error",
       {
-        "allow": ["@zed-builder/core/testing"],
+        "allow": [
+          "@zed-builder/core/testing",
+          "@zed-builder/builder-webpack/testing"
+        ],
         "depConstraints": [
           { "sourceTag": "core", "onlyDependOnLibsWithTags": [] },
           {
