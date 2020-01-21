@@ -25,7 +25,7 @@
       "@zed-builder/core/*": ["dist/libs/core/*", "libs/core/*"],
       "@zed-builder/builder-webpack": [
         "dist/libs/builder-webpack/index.d.ts",
-        "libs/builder-webpack/src/index.d.ts"
+        "libs/builder-webpack/src/index.ts"
       ],
       "@zed-builder/builder-ng-webpack": [
         "dist/libs/builder-ng-webpack/index.d.ts",
