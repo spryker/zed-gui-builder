@@ -20,7 +20,7 @@ import {
 export class ConfigurableWebpackBuilder
   implements WebpackBuilder, WebpackBuilderConfigurator {
   private configurators: WebpackConfigurator[] = [];
-  private webpackFactory: WebpackFactory = () => webpack;
+  private webpackFactory: WebpackFactory = () => require('webpack');
 
   addRule(rule: webpack.RuleSetRule): this {
     return this.addConfigurator(webpackAppendRules([rule]));
