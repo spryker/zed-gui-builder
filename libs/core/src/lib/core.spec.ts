@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NoopLogger } from '../../test/noop-logger';
-import { expectRejected } from '../../test/promise';
+import { NoopLogger } from '../../testing';
+import { expectRejected } from '../../testing/promise';
 
 import { Builder, provideBuilder, resetBuilder } from './builder';
 import { ConfigValidator, InvalidConfigError } from './config';
