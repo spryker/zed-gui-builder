@@ -6,7 +6,11 @@ import { WebpackBuilderOptions } from './builder';
 import { ConfigurableWebpackBuilder } from './configurable-webpack-builder';
 
 class WebpackCompilerMock {
-  run = jest.fn().mockReturnValue(Promise.resolve('compiled'));
+  run = jest
+    .fn()
+    .mockImplementation((cb: (e: unknown, stats: unknown) => void) =>
+      cb(null, null)
+    );
 }
 
 function createWebpackMock() {
