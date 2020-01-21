@@ -1,7 +1,18 @@
-import { builderWebpack } from './builder-webpack';
+import { createWebpackBuilder } from './builder-webpack';
+import { ConfigurableWebpackBuilder } from './configurable-webpack-builder';
 
-describe('builderWebpack', () => {
-  it('should work', () => {
-    expect(builderWebpack()).toEqual('builder-webpack');
+describe('Builder: Webpack', () => {
+  describe('createWebpackBuilder() function', () => {
+    it('should return `builder` object of type `ConfigurableWebpackBuilder`', () => {
+      expect(createWebpackBuilder().builder).toEqual(
+        expect.any(ConfigurableWebpackBuilder)
+      );
+    });
+
+    it('should return `configurator` object of type `ConfigurableWebpackBuilder`', () => {
+      expect(createWebpackBuilder().configurator).toEqual(
+        expect.any(ConfigurableWebpackBuilder)
+      );
+    });
   });
 });
